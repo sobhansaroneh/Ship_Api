@@ -1,10 +1,15 @@
+from dataclasses import field
+from multiprocessing import Event
+from pyexpat import model
 from rest_framework import  serializers
 from rest_framework.permissions import IsAuthenticated
 from django.db import models
 #from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
-from .models import User
+from .models import Booked, User , Events
+
+
 # Register serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +26,20 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+
+
+
+# Event serializer
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Events
+        fields = ('vip','title','totalcapacity', 'capacity' ,
+        'date','strattime','endtime','totalprice','currency' ,'music','dinner','drink','transfer')
+
+
+
+class BookedEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Booked
+        fields = ('user' , 'event')

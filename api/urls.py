@@ -1,6 +1,8 @@
-# from django.conf.urls import url
-from django.urls import path, include
-from .views import RegisterApi
+#from django.conf.urls import url
+from django.urls import path, include,re_path
+from .views import BookedEvent
+
 urlpatterns = [
-      path('api/register', RegisterApi.as_view()),
+      path('api/register', BookedEvent.as_view),
+
 ]
