@@ -21,13 +21,13 @@ from api.views import EventView, BookedEvent
 
 
 router = routers.SimpleRouter()
-router.register('event', EventView, basename='event')
-router.register('regiserevent',BookedEvent,basename='BookedEvent')
+router.register('api/event', EventView, basename='event')
+router.register('api/booked',BookedEvent,basename='BookedEvent')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/login/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('account/', include('api.urls')),
+    path('', include('api.urls')),
 ]
 urlpatterns += router.urls

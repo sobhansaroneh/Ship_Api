@@ -32,6 +32,7 @@ class Events(models.Model):
     endtime = models.TimeField()
     totalprice = models.PositiveIntegerField()
     currency= models.CharField(choices=currency, max_length=20)
+    image = models.ImageField(upload_to ='files/event_img')
     music = models.BooleanField()
     dinner = models.BooleanField()
     transfer = models.BooleanField()

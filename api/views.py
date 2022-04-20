@@ -7,10 +7,11 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets
 from .models import Events , User , Booked
 from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticated
 
 #Register API
 class RegisterApi(generics.GenericAPIView):
-    serializer_class = BookedEventSerializer
+    serializer_class = UserSerializer
     def post(self, request, *args,  **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -23,6 +24,7 @@ class RegisterApi(generics.GenericAPIView):
 
 
 class EventView(viewsets.ModelViewSet):
+    # permission_classes = [IsAuthenticated]
     queryset = Events.objects.all()
     serializer_class = EventSerializer
 
@@ -30,6 +32,12 @@ class EventView(viewsets.ModelViewSet):
 class BookedEvent(viewsets.ModelViewSet):
     queryset = Booked.objects.all()
     serializer_class = BookedEventSerializer
+    
+    def post(self , request):
+        if request.method == 'POST':
+            return Response(' more try')
+
+
 
 
 
