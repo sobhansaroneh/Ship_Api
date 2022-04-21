@@ -7,7 +7,7 @@ from django.db import models
 #from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
-from .models import Booked, User , Events
+from .models import Booked, User , Event
 
 
 # Register serializer
@@ -37,7 +37,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Events
+        model = Event
         fields = ('vip','title','totalcapacity', 'capacity' ,
         'date','strattime','endtime','totalprice','currency' ,'music','dinner','drink','transfer' ,'image')
 
@@ -47,3 +47,5 @@ class BookedEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booked
         fields = ('user' , 'event' ,'seat')
+    def create(self, validated_data):
+        return Booked.objects.create(**validated_data)
